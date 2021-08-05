@@ -306,13 +306,13 @@ function xmldb_offlinequiz_upgrade($oldversion = 0) {
         if (!$DB->get_records_sql("SELECT * FROM {offlinequiz_reports} WHERE name = 'overview'", array())) {
             $record = new stdClass();
             $record->name         = 'overview';
-            $record->displayorder = '10000';
+            $record->displayorder = 10000;
             $DB->insert_record('offlinequiz_reports', $record);
         }
         if (!$DB->get_records_sql("SELECT * FROM {offlinequiz_reports} WHERE name = 'rimport'", array())) {
             $record = new stdClass();
             $record->name         = 'rimport';
-            $record->displayorder = '9000';
+            $record->displayorder = 9000;
             $DB->insert_record('offlinequiz_reports', $record);
         }
 

@@ -37,16 +37,16 @@ function xmldb_offlinequiz_install() {
 
     $record = new stdClass();
     $record->name         = 'overview';
-    $record->displayorder = '10000';
+    $record->displayorder = 10000;
     $DB->insert_record('offlinequiz_reports', $record);
 
     $record = new stdClass();
     $record->name         = 'rimport';
-    $record->displayorder = '9000';
+    $record->displayorder = 9000;
     $DB->insert_record('offlinequiz_reports', $record);
 
     $record = new stdClass();
     $record->name         = 'regrade';
-    $record->displayorder = '6000';
+    $record->displayorder = 6000;
     $DB->insert_record('offlinequiz_reports', $record);
 }
