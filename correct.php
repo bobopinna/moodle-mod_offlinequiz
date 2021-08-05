@@ -875,7 +875,7 @@ function set_userid(image, x, y) {
 }
 
 function set_group(image, x) {
- for (i=0; i<=5; i++) {
+ for (i=0; i<=8; i++) {
   document.images['g'+i].src=\"$CFG->wwwroot/mod/offlinequiz/pix/spacer.gif\";
  }
  image.src=\"$CFG->wwwroot/mod/offlinequiz/pix/green.gif\"
