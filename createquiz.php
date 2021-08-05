@@ -486,22 +486,39 @@ if ($mode == 'preview') {
             }
 
             if (!$offlinequiz->docscreated) {
-                $correctionpdffile = offlinequiz_create_pdf_question($templateusage, $offlinequiz, $group,
+                if ($offlinequiz->fileformat == OFFLINEQUIZ_DOCX_FORMAT) {
+                    require_once('docxlib.php');
+                    $correctionfile = offlinequiz_create_docx_question($templateusage, $offlinequiz, $group,
                                      $course->id, $context, true);
+                } else if ($offlinequiz->fileformat == OFFLINEQUIZ_LATEX_FORMAT) {
+                    require_once('latexlib.php');
+                    $correctionfile = offlinequiz_create_latex_question($templateusage, $offlinequiz, $group,
+                                     $course->id, $context, true);
+                } else {
+                    $correctionfile = offlinequiz_create_pdf_question($templateusage, $offlinequiz, $group,
+                                     $course->id, $context, true);
+                }
                 if ($correctionpdffile) {
                     $group->correctionfilename = $correctionpdffile->get_filename();
                     $DB->update_record('offlinequiz_groups', $group);
                 }
             } else {
                 $filename = $group->correctionfilename;
-                $correctionpdffile = $fs->get_file($context->id, 'mod_offlinequiz', 'pdfs', 0, '/', $filename);
+                $correctionfile = $fs->get_file($context->id, 'mod_offlinequiz', 'pdfs', 0, '/', $filename);
             }
 
-            if ($correctionpdffile) {
-                $url = "$CFG->wwwroot/pluginfile.php/" . $correctionpdffile->get_contextid() . '/' .
-                        $correctionpdffile->get_component() . '/' . $correctionpdffile->get_filearea() . '/' .
-                        $correctionpdffile->get_itemid() . '/' . $correctionpdffile->get_filename() . '?forcedownload=1';
-                echo $OUTPUT->action_link($url, get_string('formforcorrection', 'offlinequiz', $groupletter));
+            if ($correctionfile) {
+                $filestring = get_string('formforcorrection', 'offlinequiz', $groupletter);
+                if ($offlinequiz->fileformat == OFFLINEQUIZ_DOCX_FORMAT) {
+                    $filestring = get_string('formforcorrectiondocx', 'offlinequiz', $groupletter);
+                } else if ($offlinequiz->fileformat == OFFLINEQUIZ_LATEX_FORMAT) {
+                    $filestring = get_string('formforcorrectionlatex', 'offlinequiz', $groupletter);
+                }
+                $url = "$CFG->wwwroot/pluginfile.php/" . $correctionfile->get_contextid() . '/' .
+                        $correctionfile->get_component() . '/' . $correctionfile->get_filearea() . '/' .
+                        $correctionfile->get_itemid() . '/' . $correctionfile->get_filename() . '?forcedownload=1';
+                echo $OUTPUT->action_link($url, $filestring);
+                //echo $OUTPUT->action_link($url, get_string('formforcorrection', 'offlinequiz', $groupletter));
 
                 echo '<br />&nbsp;<br />';
                 @flush();@ob_flush();
