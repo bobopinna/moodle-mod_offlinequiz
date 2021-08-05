@@ -142,7 +142,7 @@ class offlinequiz_answer_pdf extends offlinequiz_pdf {
 
         $offlinequizconfig = get_config('offlinequiz');
 
-        $letterstr = 'ABCDEF';
+        $letterstr = 'ABCDEFGHI';
 
         $logourl = trim($offlinequizconfig->logourl);
         if (!empty($logourl)) {
@@ -177,7 +177,7 @@ class offlinequiz_answer_pdf extends offlinequiz_pdf {
         $this->SetXY(34.4,  57.4);
 
         // Print boxes for groups.
-        for ($i = 0; $i <= 5; $i++) {
+        for ($i = 0; $i <= 8; $i++) {
             $this->Cell(6,  3.5,  $letterstr[$i], 0, 0, 'R');
             $this->Cell(0.85,  1, '', 0, 0, 'R');
             $this->Rect($this->GetX(),  $this->GetY(),  3.5,  3.5);

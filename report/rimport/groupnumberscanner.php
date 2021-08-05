@@ -21,7 +21,7 @@ define('BOX_SIZE', '35');
 define('BOX_DISTANCE_X', '95.7');
 define('BOX_A_CORNER_X', 288);
 define('BOX_A_CORNER_Y', 455);
-define('GROUP_BOXES', 6);
+define('GROUP_BOXES', 9);
 class offlinequiz_groupnumberscanner {
 
     private $boxscanner;
