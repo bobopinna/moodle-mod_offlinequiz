@@ -196,7 +196,7 @@ class offlinequiz_page_scanner {
         }
 
         // Load hotspots for group.
-        for ($i = 0; $i <= 5; $i++) {
+        for ($i = 0; $i <= 8; $i++) {
             $point = new oq_point(($i * 95) + 274, 440);
             $this->hotspots["g$i"] = $point;
         }
@@ -592,7 +592,7 @@ class offlinequiz_page_scanner {
         $export = array();
         $factor = $width / imagesx($this->image);
 
-        for ($i = 0; $i <= 5; $i++) {
+        for ($i = 0; $i <= 8; $i++) {
             $point = new oq_point(($this->hotspots["g$i"]->x + $this->offset->x) * $width / imagesx($this->image)
                       - 2 * $this->zoomx, ($this->hotspots["g$i"]->y + $this->offset->y) * $factor - 2 * $this->zoomy);
             $export["g$i"] = $point;
@@ -1602,7 +1602,7 @@ class offlinequiz_page_scanner {
         $value = 0;
 
         // Get all the group hotspot values and select the biggest value.
-        for ($i = 0; $i <= 5; $i++) {
+        for ($i = 0; $i <= 8; $i++) {
             $groupspots[$i] = $this->hotspot_value($this->hotspots["g$i"], true);
             if ($groupspots[$i] > $value) {
                 $group = $i;
@@ -1613,7 +1613,7 @@ class offlinequiz_page_scanner {
         // Now we go through all the group hotspots (except the one picked before)
         // and look for another hotspot with the second biggest percentage of black pixels.
         $value = 0;
-        for ($i = 0; $i <= 5; $i++) {
+        for ($i = 0; $i <= 8; $i++) {
             if ($i != $group and $groupspots[$i] > $value) {
                 $value = $groupspots[$i];
             }
@@ -1695,7 +1695,7 @@ class offlinequiz_page_scanner {
         $mediumvalue = 0;
 
         // Get all the group hotspot values as percents and select the minimum and maximum value.
-        for ($i = 0; $i <= 5; $i++) {
+        for ($i = 0; $i <= 8; $i++) {
             $groupspots[$i] = $this->hotspot_value($this->hotspots["g$i"], true);
             if ($groupspots[$i] > $maxvalue) {
                 $maxvalue = $groupspots[$i];
@@ -1705,7 +1705,7 @@ class offlinequiz_page_scanner {
             }
         }
 
-        for ($i = 0; $i <= 5; $i++) {
+        for ($i = 0; $i <= 8; $i++) {
             if ($groupspots[$i] > $minvalue && $groupspots[$i] < $maxvalue) {
                 if ($groupspots[$i] > $mediumvalue) {
                     $mediumvalue = $groupspots[$i];

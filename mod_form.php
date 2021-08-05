@@ -76,7 +76,7 @@ class mod_offlinequiz_mod_form extends moodleform_mod {
         $mform->addElement('date_time_selector', 'time', get_string("quizdate", "offlinequiz"), array('optional' => true));
 
         if (!$offlinequiz || !$offlinequiz->docscreated) {
-            for ($i = 1; $i <= 6; $i++) {
+            for ($i = 1; $i <= 9; $i++) {
                 $groupmenu[$i] = "$i";
             }
             $mform->addElement('select', 'numgroups', get_string('numbergroups', 'offlinequiz'), $groupmenu);
